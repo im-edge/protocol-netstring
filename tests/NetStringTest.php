@@ -10,7 +10,9 @@ use IMEdge\Protocol\NetString\NetStringConnection;
 use IMEdge\Protocol\NetString\NetStringProtocolError;
 use PHPUnit\Framework\TestCase;
 
+use function Amp\async;
 use function Amp\delay;
+use function Amp\Future\await;
 
 class NetStringTest extends TestCase
 {
@@ -30,6 +32,44 @@ class NetStringTest extends TestCase
     {
         $netString = new NetStringConnection(new ReadableIterableStream(self::chunkedSample()), new WritableBuffer());
         $this->assertEquals(['Thomas', 'Long name'], TestHelper::consumeAllPackets($netString));
+    }
+
+    public function testProcessesParallelAsynchronousChunks(): void
+    {
+        $netString1 = new NetStringConnection(new ReadableIterableStream((function (): Generator {
+            yield '';
+            delay(0.2);
+            yield '6:';
+            delay(0.01);
+            yield 'Hello';
+            delay(0.02);
+            yield ' ,300:unfinished';
+        })()), new WritableBuffer());
+
+        $netString2 = new NetStringConnection(new ReadableIterableStream((function (): Generator {
+            delay(0.4);
+            yield '5:World,';
+            delay(0.2);
+            yield '1:';
+            delay(0.02);
+            yield '!,42';
+        })()), new WritableBuffer());
+
+        $result = '';
+        await([
+            async(function () use ($netString1, &$result) {
+                foreach ($netString1->packets() as $packet) {
+                    $result .= $packet;
+                }
+            }),
+            async(function () use ($netString2, &$result) {
+                foreach ($netString2->packets() as $packet) {
+                    $result .= $packet;
+                }
+            })
+        ]);
+
+        $this->assertEquals('Hello World!', $result);
     }
 
     public function testNestedEncodingIsSupported(): void
