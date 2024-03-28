@@ -5,9 +5,9 @@ This library implements the [NetString](https://en.wikipedia.org/wiki/Netstring)
 protocol and provides a **NetStringReader**, a **NetStringWriter** and a bidirectional
 **NetStringConnection** implementation for [AMPHP](https://amphp.org/).
 
-[![Coding Standards](https://github.com/imedge/protocol-netstring/actions/workflows/CodingStandards.yml/badge.svg)](https://github.com/imedge/protocol-netstring/actions/workflows/CodingStandards.yml)
-[![Unit Tests](https://github.com/imedge/protocol-netstring/actions/workflows/UnitTests.yml/badge.svg)](https://github.com/imedge/protocol-netstring/actions/workflows/UnitTests.yml)
-[![Static Analysis](https://github.com/imedge/protocol-netstring/actions/workflows/StaticAnalysis.yml/badge.svg)](https://github.com/imedge/protocol-netstring/actions/workflows/StaticAnalysis.yml)
+[![Coding Standards](https://github.com/im-edge/protocol-netstring/actions/workflows/CodingStandards.yml/badge.svg)](https://github.com/im-edge/protocol-netstring/actions/workflows/CodingStandards.yml)
+[![Unit Tests](https://github.com/im-edge/protocol-netstring/actions/workflows/UnitTests.yml/badge.svg)](https://github.com/im-edge/protocol-netstring/actions/workflows/UnitTests.yml)
+[![Static Analysis](https://github.com/im-edge/protocol-netstring/actions/workflows/StaticAnalysis.yml/badge.svg)](https://github.com/im-edge/protocol-netstring/actions/workflows/StaticAnalysis.yml)
 [![PHPStan Level 9](https://img.shields.io/badge/PHPStan-level%209-brightgreen.svg?style=flat)](https://phpstan.org/)
 [![Minimum PHP Version: 8.1](https://img.shields.io/badge/php-%3E%3D%208.1-8892BF.svg)](https://php.net/)
 [![License: MIT](https://poser.pugx.org/imedge/protocol-netstring/license)](https://choosealicense.com/licenses/mit/)
