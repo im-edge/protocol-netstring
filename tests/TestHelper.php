@@ -24,12 +24,7 @@ class TestHelper
      */
     public static function consumeAllPacketsReading(NetStringReaderInterface $netString): array
     {
-        $results = [];
-        while (null !== ($packet = $netString->packets())) {
-            $results[] = $packet;
-        }
-
-        return $results;
+        return iterator_to_array($netString->packets());
     }
 
     public static function catchOutput(callable $callable): string

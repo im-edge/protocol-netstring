@@ -36,7 +36,6 @@ trait NetStringReaderImplementation
     {
         while (null !== ($data = $this->in->read())) {
             $this->buffer .= $data;
-            // var_dump("> $data\n");
             $this->bufferLength += strlen($data);
             while ($this->bufferHasPacket()) {
                 $packet = $this->getNextPacketFromBuffer();
