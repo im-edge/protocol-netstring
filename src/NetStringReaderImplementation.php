@@ -122,7 +122,7 @@ trait NetStringReaderImplementation
     {
         throw new RuntimeException('NO, this does not work');
         // This does not work as expected, fails if we ship two packets at once
-        return $this->packets()->current();
+        // return $this->packets()->current();
     }
 
     public function isReadable(): bool
