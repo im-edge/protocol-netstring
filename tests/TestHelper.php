@@ -19,6 +19,19 @@ class TestHelper
         return $results;
     }
 
+    /**
+     * @return string[]
+     */
+    public static function consumeAllPacketsReading(NetStringReaderInterface $netString): array
+    {
+        $results = [];
+        while (null !== ($packet = $netString->packets())) {
+            $results[] = $packet;
+        }
+
+        return $results;
+    }
+
     public static function catchOutput(callable $callable): string
     {
         ob_start();

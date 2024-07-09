@@ -3,14 +3,29 @@
 namespace IMEdge\Protocol\NetString;
 
 use Amp\ByteStream\ReadableStream;
+use Closure;
+use IteratorAggregate;
 
-class NetStringReader implements NetStringReaderInterface
+/**
+ * @implements IteratorAggregate<string>
+ */
+class NetStringReader implements NetStringReaderInterface, ReadableStream, IteratorAggregate
 {
     use NetStringReaderImplementation;
 
     public function __construct(
         protected readonly ReadableStream $in,
     ) {
+    }
+
+    public function isClosed(): bool
+    {
+        return $this->in->isClosed();
+    }
+
+    public function onClose(Closure $onClose): void
+    {
+        $this->in->onClose($onClose);
     }
 
     public function close(): void

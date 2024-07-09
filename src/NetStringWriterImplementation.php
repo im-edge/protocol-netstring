@@ -33,4 +33,14 @@ trait NetStringWriterImplementation
     {
         $this->out->write(strlen($data) . ':' . $data . ',');
     }
+
+    public function end(): void
+    {
+        $this->out->end();
+    }
+
+    public function isWritable(): bool
+    {
+        return $this->out->isWritable();
+    }
 }
